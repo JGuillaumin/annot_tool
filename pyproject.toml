@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools",]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 110
+target-version = ['py310']
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | \venv
+)/
+'''
+
+[tool.coverage.report]
+exclude_lines = ["pragma: no cover", "if __name__ = .__main__.", "if TYPE_CHECKING:"]
+show_missing = true
+skip_empty = true
+
+[tool.isort]
+profile = "black"
+src_paths = ["src/", ]
+atomic = true
+line_length = 110
+lines_after_imports = 2
+lines_between_types = 1
+include_trailing_comma = true
+use_parentheses = true
+known_first_party = ["annot_tool"]
+skip_glob = ["*/setup.py"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+
+[tool.pylint.basic]
+good-names=[
+  "x1",
+  "x2",
+  "y1",
+  "y2",
+  "xc",
+  "yc",
+]
+class-const-naming-style="any"
+
+[tool.pylint.design]
+max-args=10
+max-branches=15
+max-locals=20
+
+[tool.pylint.format]
+max-line-length=110
+
+[tool.pylint.master]
+fail-under="9.5"
+suggestion-mode="yes"
+load-plugins=["pylint_pytest"]
+extension-pkg-whitelist=["pydantic"]
+# As a temporary workaround for https://github.com/PyCQA/pylint/issues/4577
+init-hook = "import astroid; astroid.context.InferenceContext.max_inferred = 500"
+
+[tool.pylint.similarities]
+ignore-imports="yes"
+ignore-signatures="yes"

@@ -1,0 +1,10 @@
+pandas
+numpy
+scikit-image
+dash
+dash_bootstrap_components
+plotly
+tqdm
+loguru
+pydantic
+colorlover
